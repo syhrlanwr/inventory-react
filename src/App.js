@@ -10,6 +10,7 @@ import AddSatuan from './AddSatuan';
 import EditSatuan from './EditSatuan';
 import KelolaUser from './KelolaUser';
 import AddUser from './AddUser';
+import EditUser from './EditUser';
 import Layout from './layouts/Layout';
 import Login from './Login';
 import KelolaPegawai from './KelolaPegawai';
@@ -25,8 +26,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/user" element={<Layout><KelolaUser /></Layout>} />
-        <Route path="/user/add" element={<Layout><AddUser /></Layout>} />
+        <Route path="/users" element={<Layout><KelolaUser /></Layout>} />
+        <Route path="/users/add" element={<Layout><AddUser /></Layout>} />
+        <Route path="/users/edit/:id" element={<Layout><EditUser /></Layout>} />
+        <Route path="/users/delete/:id" element={<Layout><KelolaUser /></Layout>} />
         <Route path="/pegawai" element={<Layout><KelolaPegawai /></Layout>} />
         <Route path="/rak" element={<Layout><KelolaRak /></Layout>} />
         <Route path="/rak/add" element={<Layout><AddRak /></Layout>} />
