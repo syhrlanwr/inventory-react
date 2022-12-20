@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function AddRak() {
     const [nama, setNama] = useState('');
+    const navigate = useNavigate();
 
     function HandleSubmit(e) {
         e.preventDefault();
@@ -14,7 +15,7 @@ function AddRak() {
                 }})
             .then(res => {
                 console.log(res);
-                this.props.history.push('/rak');
+                navigate('/rak');
             }).catch(err => {
                 console.log(err);
             })

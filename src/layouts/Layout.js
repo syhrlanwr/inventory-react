@@ -9,7 +9,7 @@ function Layout({ children }) {
                     <Header />
                     <div className="flex h-full">
                         <Sidebar />
-                        <div className="flex flex-col w-full overflow-x-hidden overflow-y-auto mb-18">
+                        <div className="flex flex-col w-full position-relative overflow-y-auto">
                             <div className="flex w-full mx-auto px-6 py-8">
                                 <div className="flex flex-col w-full">
                                     {children}
