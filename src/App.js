@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditRak from './EditRak';
 // import KelolaRak from './kelolaRak';
 import AddSatuan from './AddSatuan';
-// import EditSatuan from './editSatuan';
+import EditSatuan from './EditSatuan';
 // import KelolaSatuan from './kelolaSatuan';
 import KelolaUser from './KelolaUser';
 import AddUser from './AddUser';
@@ -35,6 +35,7 @@ function App() {
         <Route path="/rak/delete/:id" element={<Layout><EditRak /></Layout>} />
         <Route path="/satuan" element={<Layout><KelolaSatuan /></Layout>} />
         <Route path="/satuan/add" element={<Layout><AddSatuan /></Layout>} />
+        <Route path="/satuan/edit/:id" element={<Layout><EditSatuan /></Layout>} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
