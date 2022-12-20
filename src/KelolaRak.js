@@ -5,7 +5,7 @@ function KelolaRak() {
     const [rak, setRak] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/rak')
+        axios.get('http://localhost:3001/rak')
             .then(res => {
                 setRak(res.data);
             }).catch(err => {

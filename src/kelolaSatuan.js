@@ -1,4 +1,18 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 function KelolaSatuan() {
+    const [satuan, setSatuan] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/satuan')
+            .then(res => {
+                setSatuan(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
+    }, [])
+
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -23,7 +37,16 @@ function KelolaSatuan() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* disini body */}
+                {satuan.map((satuan, index) => (
+                        <tr key={satuan.id} className="border-b border-gray-200 hover:bg-gray-100">
+                            <td className="p-3 px-5">{index + 1}</td>
+                            <td className="p-3 px-5">{satuan.nama}</td>
+                            <td className="p-3 px-5">
+                                <a href={`/satuan/edit/${satuan.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
+                                <a href={`/satuan/delete/${satuan.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5">Hapus</a>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <script>
