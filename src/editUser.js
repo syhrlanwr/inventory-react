@@ -1,4 +1,4 @@
-function editUser() {
+function EditUser() {
     return (
         <div class="bg-white rounded-lg shadow-lg">
             <form class="flex flex-col px-8 py-6" action="/users/edit/" method="POST">
@@ -13,4 +13,4 @@ function editUser() {
     )
 }
 
-export default editUser;
+export default EditUser;

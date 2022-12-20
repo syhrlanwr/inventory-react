@@ -11,7 +11,11 @@ function KelolaSatuan() {
             }).catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, []);
+
+    const deleteSatuan = async (id) => {
+        await axios.delete(`http://localhost:3001/satuan/${id}`);
+    }
 
     return (
         <div>
@@ -43,15 +47,12 @@ function KelolaSatuan() {
                             <td className="p-3 px-5">{satuan.nama}</td>
                             <td className="p-3 px-5">
                                 <a href={`/satuan/edit/${satuan.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
-                                <a href={`/satuan/delete/${satuan.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5">Hapus</a>
+                                <a href={`/satuan/delete/${satuan.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteSatuan(satuan.id)}>Hapus</a>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <script>
-                {/* disini script */}
-            </script>
         </div>
     )
 }

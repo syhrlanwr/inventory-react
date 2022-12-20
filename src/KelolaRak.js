@@ -11,8 +11,11 @@ function KelolaRak() {
             }).catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, []);
 
+    const deleteRak = async (id) => {
+        await axios.delete(`http://localhost:3001/rak/${id}`);
+    }
 
     return (
         <div>
@@ -34,15 +37,12 @@ function KelolaRak() {
                             <td className="p-3 px-5">{rak.nama}</td>
                             <td className="p-3 px-5">
                                 <a href={`/rak/edit/${rak.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
-                                <a href={`/rak/delete/${rak.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5">Hapus</a>
+                                <a href={`/rak/delete/${rak.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteRak(rak.id)}>Hapus</a>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <script>
-                {/* disini script */}
-            </script>
         </div>
     )
 }

@@ -2,23 +2,17 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AddRak () {
+function AddRak() {
     const [nama, setNama] = useState('');
     const navigate = useNavigate();
-    
 
-    const saveRak = async(e) => {
+
+    const saveRak = async (e) => {
         e.preventDefault();
-        try {
-            await axios.post('http://localhost:3001/rak', {
-                nama: nama,
-            });
-            navigate("/rak");
-        } catch (error) {
-            if(error.response) {
-                // setMsg(error.response.data.msg);
-            }
-        }
+        await axios.post('http://localhost:3001/rak', {
+            nama: nama,
+        });
+        navigate("/rak");
     }
 
     return (
