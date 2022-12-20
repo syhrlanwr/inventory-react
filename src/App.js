@@ -10,13 +10,27 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import EditSatuan from './editSatuan';
 // import KelolaSatuan from './kelolaSatuan';
 import KelolaUser from './kelolaUser';
+import Layout from './layouts/Layout';
+import Login from './Login';
+import KelolaPegawai from './kelolaPegawai';
+import KelolaRak from './KelolaRak';
+import KelolaSatuan from './kelolaSatuan';
+import AddRak from './AddRak';
+import Home from './Home';
+
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<KelolaUser />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/user" element={<Layout><KelolaUser /></Layout>} />
+        <Route path="/pegawai" element={<Layout><KelolaPegawai /></Layout>} />
+        <Route path="/rak" element={<Layout><KelolaRak /></Layout>} />
+        <Route path="/rak/add" element={<Layout><AddRak /></Layout>} />
+        <Route path="/satuan" element={<Layout><KelolaSatuan /></Layout>} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
