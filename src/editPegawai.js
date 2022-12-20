@@ -1,4 +1,4 @@
-function editPegawai (){
+function EditPegawai (){
     return (
         <div className="bg-white rounded-lg shadow-lg">
             <form action="/pegawai/edit/" method="POST" className="flex flex-col px-8 py-6">
@@ -18,4 +18,4 @@ function editPegawai (){
     )
 }
 
-export default editPegawai;
+export default EditPegawai;

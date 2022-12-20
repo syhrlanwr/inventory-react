@@ -1,4 +1,4 @@
-function kelolaPegawai() {
+function KelolaPegawai() {
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -35,4 +35,4 @@ function kelolaPegawai() {
     )
 }
 
-export default kelolaPegawai;
+export default KelolaPegawai;
