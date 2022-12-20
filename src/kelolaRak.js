@@ -1,4 +1,4 @@
-function kelolaRak() {
+function KelolaRak() {
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -33,4 +33,4 @@ function kelolaRak() {
     )
 }
 
-export default kelolaRak;
+export default KelolaRak;

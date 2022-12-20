@@ -1,4 +1,4 @@
-function addSatuan() {
+function AddSatuan() {
     return (
         <div className="bg-white rounded-lg shadow-lg">
             <form className="flex flex-col px-8 py-6" action="/satuan/add" method="POST">
@@ -14,4 +14,4 @@ function addSatuan() {
     )
 }
 
-export default addSatuan;
+export default AddSatuan;

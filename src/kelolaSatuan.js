@@ -1,4 +1,4 @@
-function kelolaSatuan() {
+function KelolaSatuan() {
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -33,4 +33,4 @@ function kelolaSatuan() {
     )
 }
 
-export default kelolaSatuan;
+export default KelolaSatuan;

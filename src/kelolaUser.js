@@ -1,4 +1,4 @@
-function kelolaUser() {
+function KelolaUser() {
     return (
         <div>
             <div class="flex justify-between items-center mb-4">
@@ -35,4 +35,4 @@ function kelolaUser() {
     )
 }
 
-export default kelolaUser;
+export default KelolaUser;

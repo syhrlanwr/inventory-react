@@ -1,4 +1,4 @@
-function addPegawai (){
+function AddPegawai (){
     return (
         <div className="bg- white rounded-lg shadow-lg">
             <form action="/pegawai/add" method="POST" className="flex flex-col px-8 py -6">
@@ -18,4 +18,4 @@ function addPegawai (){
     )
 }
 
-export default addPegawai;
+export default AddPegawai;

@@ -1,4 +1,4 @@
-function addRak() {
+function AddRak() {
     return (
         <div className="bg-white rounded-lg shadow-lg">
             <form className="flex flex-col px-8 py-6" action="/rak/add" method="POST">
@@ -14,4 +14,4 @@ function addRak() {
     )
 }
 
-export default addRak;
+export default AddRak;

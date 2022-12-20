@@ -1,4 +1,4 @@
-function addUser() {
+function AddUser() {
     return (
         <div className="bg-white rounded-lg shadow-lg">
             <form className="flex flex-col px-8 py-6" action="/users/add" method="POST">
@@ -13,4 +13,4 @@ function addUser() {
     )
 }
 
-export default addUser;
+export default AddUser;
