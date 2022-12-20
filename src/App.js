@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import EditPegawai from './editPegawai';
 // import KelolaPegawai from './kelolaPegawai';
 // import AddRak from './addRak';
-// import EditRak from './editRak';
+import EditRak from './EditRak';
 // import KelolaRak from './kelolaRak';
 import AddSatuan from './AddSatuan';
 // import EditSatuan from './editSatuan';
@@ -31,6 +31,8 @@ function App() {
         <Route path="/pegawai" element={<Layout><KelolaPegawai /></Layout>} />
         <Route path="/rak" element={<Layout><KelolaRak /></Layout>} />
         <Route path="/rak/add" element={<Layout><AddRak /></Layout>} />
+        <Route path="/rak/edit/:id" element={<Layout><EditRak /></Layout>} />
+        <Route path="/rak/delete/:id" element={<Layout><EditRak /></Layout>} />
         <Route path="/satuan" element={<Layout><KelolaSatuan /></Layout>} />
         <Route path="/satuan/add" element={<Layout><AddSatuan /></Layout>} />
         <Route path="/login" element={<Login />} />
