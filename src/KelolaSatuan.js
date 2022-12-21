@@ -5,13 +5,13 @@ function KelolaSatuan() {
     const [satuan, setSatuan] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/satuan')
+        axios.get('http://localhost:5000/satuan')
             .then(res => {
                 setSatuan(res.data);
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [satuan]);
 
     const deleteSatuan = async (id) => {
         await axios.delete(`http://localhost:3001/satuan/${id}`);
