@@ -20,6 +20,10 @@ function Header(){
     const refreshToken = async () => {
         try {
 	        const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
+<<<<<<< HEAD
+=======
+	        setToken(res.data.access_token);
+>>>>>>> a8f4537a6cdf8dac5a28e8ad84e24e7fe43a1872
 	        const decoded = jwt_decode(res.data.accessToken);
 	        console.log(decoded);
             setName(decoded.name);

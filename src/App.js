@@ -17,6 +17,9 @@ import KelolaPegawai from './KelolaPegawai';
 import KelolaRak from './KelolaRak';
 import KelolaSatuan from './KelolaSatuan';
 import AddRak from './AddRak';
+import AddJenis from './AddJenis';
+import EditJenis from './EditJenis';
+import KelolaJenis from './KelolaJenis';
 import Home from './Home';
 
 
@@ -39,6 +42,10 @@ function App() {
         <Route path="/satuan/add" element={<Layout><AddSatuan /></Layout>} />
         <Route path="/satuan/edit/:id" element={<Layout><EditSatuan /></Layout>} />
         <Route path="/satuan/delete/:id" element={<Layout><KelolaSatuan /></Layout>} />
+        <Route path="/jenis" element={<Layout><KelolaJenis /></Layout>} />
+        <Route path="/jenis/add" element={<Layout><AddJenis /></Layout>} />
+        <Route path="/jenis/edit/:id" element={<Layout><EditJenis /></Layout>} />
+        <Route path="/jenis/delete/:id" element={<Layout><KelolaJenis /></Layout>} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>

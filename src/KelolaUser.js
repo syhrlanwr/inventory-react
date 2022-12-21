@@ -49,7 +49,7 @@ function KelolaUser() {
     }, [token]);
 
     const deleteUsers = async (id) => {
-        await axios.delete(`http://localhost:3001/users/${id}`);
+        await axios.delete(`http://localhost:5000/users/${id}`);
     }
     return (
         <div>
