@@ -14,7 +14,7 @@ function KelolaSatuan() {
     }, [satuan]);
 
     const deleteSatuan = async (id) => {
-        await axios.delete(`http://localhost:3001/satuan/${id}`);
+        await axios.delete(`http://localhost:5000/satuan/${id}`);
     }
 
     return (
