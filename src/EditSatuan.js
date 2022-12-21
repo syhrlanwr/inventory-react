@@ -6,6 +6,7 @@ function EditSatuan() {
     const [nama, setNama] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
+    
 
     useEffect(() => {
         axios.get(`http://localhost:5000/satuan/${id}`).then((res) => {

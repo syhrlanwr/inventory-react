@@ -11,7 +11,7 @@ function KelolaSatuan() {
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [satuan]);
 
     const deleteSatuan = async (id) => {
         await axios.delete(`http://localhost:5000/satuan/${id}`);
