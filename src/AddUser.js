@@ -6,17 +6,15 @@ const AddUser = () => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [image, setImage] = useState('');
     const navigate = useNavigate();
     
 
     const saveUsers = async(e) => {
         e.preventDefault();
-            await axios.post('http://localhost:3001/users', {
+            await axios.post('http://localhost:5000/users', {
                 name: name,
                 username: username,
                 password: password,
-                // image: image,
             });
             navigate("/users");
     }

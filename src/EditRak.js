@@ -8,7 +8,7 @@ function EditRak() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/rak/${id}`).then((res) => {
+        axios.get(`http://localhost:5000/rak/${id}`).then((res) => {
             setNama(res.data.nama);
         });
     }, [id]);
@@ -19,7 +19,7 @@ function EditRak() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:3001/rak/${id}`, data).then(navigate("/rak"));
+        axios.put(`http://localhost:5000/rak/${id}`, data).then(navigate("/rak"));
     }
 
     return (

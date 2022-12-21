@@ -5,7 +5,7 @@ function KelolaRak() {
     const [rak, setRak] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/rak')
+        axios.get('http://localhost:5000/rak')
             .then(res => {
                 setRak(res.data);
             }).catch(err => {
@@ -14,7 +14,7 @@ function KelolaRak() {
     }, []);
 
     const deleteRak = async (id) => {
-        await axios.delete(`http://localhost:3001/rak/${id}`);
+        await axios.delete(`http://localhost:5000/rak/${id}`);
     }
 
     return (

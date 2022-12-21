@@ -8,7 +8,7 @@ function EditSatuan() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/satuan/${id}`).then((res) => {
+        axios.get(`http://localhost:5000/satuan/${id}`).then((res) => {
             setNama(res.data.nama);
         });
     }, [id]);
@@ -19,7 +19,7 @@ function EditSatuan() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:3001/satuan/${id}`, data).then(navigate("/satuan"));
+        axios.put(`http://localhost:5000/satuan/${id}`, data).then(navigate("/satuan"));
     }
     return (
         <div className="bg-white rounded-lg shadow-lg">

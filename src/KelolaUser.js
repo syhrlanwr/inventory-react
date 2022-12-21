@@ -5,7 +5,7 @@ function KelolaUser() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users')
+        axios.get('http://localhost:5000/users')
             .then(res => {
                 setUsers(res.data);
             }).catch(err => {
@@ -14,7 +14,7 @@ function KelolaUser() {
     }, []);
 
     const deleteUsers = async (id) => {
-        await axios.delete(`http://localhost:3001/users/${id}`);
+        await axios.delete(`http://localhost:5000/users/${id}`);
     }
     return (
         <div>

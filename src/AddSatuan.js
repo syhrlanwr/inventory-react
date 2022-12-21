@@ -9,7 +9,7 @@ function AddSatuan () {
 
     const saveSatuan = async(e) => {
         e.preventDefault();
-            await axios.post('http://localhost:3001/satuan', {
+            await axios.post('http://localhost:5000/satuan', {
                 nama: nama,
             });
             navigate("/satuan");

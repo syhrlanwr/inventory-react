@@ -10,7 +10,7 @@ function EditUser() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/users/${id}`).then((res) => {
+        axios.get(`http://localhost:5000/users/${id}`).then((res) => {
             setName(res.data.name);
             setUsername(res.data.username);
             setPassword(res.data.password);
@@ -25,7 +25,7 @@ function EditUser() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:3001/users/${id}`, data).then(navigate("/users"));
+        axios.put(`http://localhost:5000/users/${id}`, data).then(navigate("/users"));
     }
 
     return (
