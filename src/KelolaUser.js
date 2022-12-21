@@ -1,17 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 function KelolaUser() {
     const [users, setUsers] = useState([]);
+    const [token, setToken] = useState("");
+    const [expired, setExpired] = useState("");
+
+    
+    useEffect(() => {
+        refreshToken();
+    }, []);
+
+    const refreshToken = async () => {
+        try {
+	        const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
+	        const decoded = jwt_decode(res.data.accessToken);
+            console.log(decoded);
+            setToken(res.data.accessToken);
+            setExpired(decoded.exp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const axiosjwt = axios.create();
+    axiosjwt.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expired * 1000 < currentDate.getTime()) {
+            const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
+            config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+            const decoded = jwt_decode(res.data.accessToken);
+            setToken(res.data.accessToken);
+            setExpired(decoded.exp);
+        }
+        return config;
+    } , (error) => {
+        return Promise.reject(error);
+    });
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users')
+        axios.get('http://localhost:5000/users', {headers: {Authorization: `Bearer ${token}`}})
             .then(res => {
                 setUsers(res.data);
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [token]);
 
     const deleteUsers = async (id) => {
         await axios.delete(`http://localhost:3001/users/${id}`);
@@ -20,16 +55,6 @@ function KelolaUser() {
         <div>
             <div className="flex justify-between items-center mb-4">
                 <div className="text-xl"> <a className="hover:bg-sky-600 bg-sky-500 text-white px-4 py-2 rounded-lg font-medium" href="/users/add"><span className="mdi mdi-account-multiple-plus mr-2"></span>Tambah User</a></div>
-                <div className="text-xl flex items-center">
-                    <p className="text-gray-800 font-medium mr-2">Tampilkan </p><select className="bg-white border border-gray-300 rounded-lg px-4 py-2 outline-none" id="rows" onchange="changeRows()">
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select>
-                    <p className="text-gray-800 font-medium ml-2">baris</p>
-                </div>
             </div>
             <table className="table-auto w-full text-md bg-white shadow-md rounded-lg overflow-hidden" id="table">
                 <thead className="bg-gray-800 border-b border-gray-300 text-white">

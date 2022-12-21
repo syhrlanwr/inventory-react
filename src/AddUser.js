@@ -12,7 +12,7 @@ const AddUser = () => {
 
     const saveUsers = async(e) => {
         e.preventDefault();
-            await axios.post('http://localhost:3001/users', {
+            await axios.post('http://localhost:5000/users', {
                 name: name,
                 username: username,
                 password: password,

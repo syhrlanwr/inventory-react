@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
+
 function Header(){
+
     const [isOpen, setIsOpen] = useState(false)
+    const [name, setName] = useState('');
+    const [expired, setExpired] = useState('');
 
     const toggle = () => {
         setIsOpen(!isOpen)
     }
-
-    const [user, setUser] = useState({});
-    const [token, setToken] = useState("");
 
     useEffect(() => {
         refreshToken();
@@ -19,14 +20,30 @@ function Header(){
     const refreshToken = async () => {
         try {
 	        const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
-	        setToken(res.data.accessToken);
 	        const decoded = jwt_decode(res.data.accessToken);
 	        console.log(decoded);
-            setUser(decoded);
+            setName(decoded.name);
+            setExpired(decoded.exp);
         } catch (error) {
             console.log(error);
         }
     }
+
+    const axiosjwt = axios.create();
+    axiosjwt.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expired * 1000 < currentDate.getTime()) {
+            const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
+            config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+            const decoded = jwt_decode(res.data.accessToken);
+            setName(decoded.name);
+            setExpired(decoded.exp);
+
+        }
+        return config;
+    } , (error) => {
+        return Promise.reject(error);
+    });
 
     let dropdownMenu = null;
 
@@ -60,7 +77,7 @@ function Header(){
             <div className="text-xl font-semibold">
                 <button className="flex items-center text-white justify-between" onClick={() => toggle()}>
                     <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" className="w-10 h-10 rounded-full mr-2" />
-                    <span className="text-white text-xl font-semibold">{user.name}</span>
+                    <span className="text-white text-xl font-semibold">{name}</span>
                     <span className="mdi mdi-chevron-down"></span>
                 </button>
                 {dropdownMenu}
