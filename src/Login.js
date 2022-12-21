@@ -29,11 +29,10 @@ function Login() {
             const res = await axios.post("http://localhost:5000/auth/login", {
                 username: user,
                 password: password,
-            }, { headers: { "Content-Type": "application/json" }});
+            }, { headers: { "Content-Type": "application/json" }, withCredentials: true });
             console.log(res.data);
             navigate("/");
         } catch (error) {
-            console.log(error);
             setErrMsg(error.response.data.message);
             errorRef.current.focus();
         }

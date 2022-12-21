@@ -1,10 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 function Header(){
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
         setIsOpen(!isOpen)
+    }
+
+    const [user, setUser] = useState({});
+    const [token, setToken] = useState("");
+
+    useEffect(() => {
+        refreshToken();
+    }, []);
+
+    const refreshToken = async () => {
+        try {
+	        const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
+	        setToken(res.data.access_token);
+	        const decoded = jwt_decode(res.data.accessToken);
+	        console.log(decoded);
+            setUser(decoded);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     let dropdownMenu = null;
@@ -39,7 +60,7 @@ function Header(){
             <div className="text-xl font-semibold">
                 <button className="flex items-center text-white justify-between" onClick={() => toggle()}>
                     <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" className="w-10 h-10 rounded-full mr-2" />
-                    <span className="text-white text-xl font-semibold">Asep Kobra</span>
+                    <span className="text-white text-xl font-semibold">{user.name}</span>
                     <span className="mdi mdi-chevron-down"></span>
                 </button>
                 {dropdownMenu}
