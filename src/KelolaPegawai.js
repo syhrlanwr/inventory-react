@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function KelolaPegawai() {
+    const [pegawai, setPegawai] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/pegawai')
+            .then(res => {
+                setPegawai(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+    const deletePegawai = async (id) => {
+        await axios.delete(`http://localhost:5000/pegawai/${id}`);
+    }
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -28,12 +42,19 @@ function KelolaPegawai() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* disini body */}
+                {pegawai.map((pegawai, index) => (
+                        <tr key={pegawai.id} className="border-b border-gray-200 hover:bg-gray-100">
+                            <td className="p-3 px-5">{index + 1}</td>
+                            <td className="p-3 px-5">{pegawai.nip}</td>
+                            <td className="p-3 px-5">{pegawai.nama}</td>
+                            <td className="p-3 px-5">
+                                <a href={`/pegawai/edit/${pegawai.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
+                                <a href={`/pegawai/delete/${pegawai.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deletePegawai(pegawai.id)}>Hapus</a>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
-            <script>
-                {/* disini script */}
-            </script>
         </div>
     )
 }

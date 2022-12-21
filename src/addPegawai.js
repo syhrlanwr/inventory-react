@@ -23,13 +23,13 @@ function AddPegawai() {
             <label for="nip" className="mb-1 text-gray-600">
               NIP
             </label>
-            <input type="text" name="nip" placeholder="NIP" className="border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-blue-500" onChange={(e) => setNama(e.target.value)} value={nama} />
+            <input type="text" name="nip" placeholder="NIP" className="border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-blue-500" onChange={(e) => setNip(e.target.value)} value={nip} />
           </div>
           <div className="flex flex-col mb-6">
             <label for="name" className="mb-1 text-gray-600">
               Nama
             </label>
-            <input type="text" name="nama" placeholder="Nama" className="border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-blue-500" onChange={(e) => setNip(e.target.value)} value={nip} />
+            <input type="text" name="nama" placeholder="Nama" className="border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-blue-500" onChange={(e) => setNama(e.target.value)} value={nama} />
           </div>
           <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded font-medium hover:bg-sky-600">
             Tambahkan
