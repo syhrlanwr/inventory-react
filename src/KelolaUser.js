@@ -1,4 +1,21 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 function KelolaUser() {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/users')
+            .then(res => {
+                setUsers(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+    const deleteUsers = async (id) => {
+        await axios.delete(`http://localhost:3001/users/${id}`);
+    }
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -25,12 +42,20 @@ function KelolaUser() {
                     </tr>
                 </thead>
                 <tbody>
-
+                {users.map((users, index) => (
+                        <tr key={users.id} className="border-b border-gray-200 hover:bg-gray-100">
+                            <td className="p-3 px-5">{index + 1}</td>
+                            <td className="p-3 px-5">{users.name}</td>
+                            <td className="p-3 px-5">{users.username}</td>
+                            <td className="p-3 px-5">{users.createdAt}</td>
+                            <td className="p-3 px-5">
+                                <a href={`/users/edit/${users.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
+                                <a href={`/users/delete/${users.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteUsers(users.id)}>Hapus</a>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
-            <script>
-                {/* disini script */}
-            </script>
         </div>
     )
 }
