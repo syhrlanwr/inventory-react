@@ -39,7 +39,7 @@ function EditPegawai (){
                         <label for="name" className="mb-1 text-gray-600">Nama</label>
                         <input type="text" name="nama" placeholder="Nama" className="border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-blue-500" required value={nama} onChange={(e) => setNama(e.target.value)}/>
                     </div>
-                    <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded font-medium hover:bg-sky-600">Edit</button>
+                    <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded font-medium hover:bg-sky-600" onClick={Update}>Edit</button>
                 </div>
             </form>
         </div>

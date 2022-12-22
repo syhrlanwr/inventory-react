@@ -47,9 +47,6 @@ function KelolaPegawai() {
                     ))}
                 </tbody>
             </table>
-            <script>
-                {/* disini script */}
-            </script>
         </div>
     )
 }

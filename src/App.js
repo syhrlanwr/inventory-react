@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Login from './Login';
-// import AddPegawai from './addPegawai';
-// import EditPegawai from './editPegawai';
-// import KelolaPegawai from './kelolaPegawai';
+import KelolaPegawai from './KelolaPegawai';
 // import AddRak from './addRak';
 import EditRak from './EditRak';
 // import KelolaRak from './kelolaRak';
@@ -13,7 +11,6 @@ import AddUser from './AddUser';
 import EditUser from './EditUser';
 import Layout from './layouts/Layout';
 import Login from './Login';
-import KelolaPegawai from './KelolaPegawai';
 import KelolaRak from './KelolaRak';
 import KelolaSatuan from './KelolaSatuan';
 import AddRak from './AddRak';
@@ -32,8 +29,6 @@ import EditBarangKeluar from './EditBarangKeluar';
 import KelolaPengembalian from './KelolaPengembalian';
 import AddPengembalian from './AddPengembalian';
 import Laporan from './Laporan';
-
-
 
 function App() {
   return (
