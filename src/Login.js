@@ -5,14 +5,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errorRef = useRef();
 
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
-    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,11 +24,13 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/auth/login", {
+            const { data } = await axios.post("auth/login", {
                 username: user,
                 password: password,
-            }, { headers: { "Content-Type": "application/json" }, withCredentials: true });
-            console.log(res.data);
+            }, {
+                withCredentials: true,
+            });
+            console.log(data);
             navigate("/");
         } catch (error) {
             setErrMsg(error.response.data.message);

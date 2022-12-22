@@ -6,6 +6,7 @@ function KelolaUser() {
     const [users, setUsers] = useState([]);
     const [token, setToken] = useState("");
     const [expired, setExpired] = useState("");
+    const [loading, setLoading] = useState(false);
 
     
     useEffect(() => {
@@ -43,13 +44,15 @@ function KelolaUser() {
         axios.get('http://localhost:5000/users', {headers: {Authorization: `Bearer ${token}`}})
             .then(res => {
                 setUsers(res.data);
+                setLoading(true);
             }).catch(err => {
                 console.log(err);
             })
-    }, [token]);
+    }, [loading, token]);
 
     const deleteUsers = async (id) => {
         await axios.delete(`http://localhost:5000/users/${id}`);
+        setLoading(false);
     }
     return (
         <div>
@@ -75,7 +78,7 @@ function KelolaUser() {
                             <td className="p-3 px-5">{users.createdAt}</td>
                             <td className="p-3 px-5">
                                 <a href={`/users/edit/${users.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
-                                <a href={`/users/delete/${users.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteUsers(users.id)}>Hapus</a>
+                                <button className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteUsers(users.id)}>Hapus</button>
                             </td>
                         </tr>
                     ))}

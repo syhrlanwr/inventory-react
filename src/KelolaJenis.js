@@ -3,18 +3,23 @@ import axios from 'axios';
 
 function KelolaJenis() {
     const [jenis, setJenis] = useState([]);
+    const [toggle, setToggle] = useState(false);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         axios.get('http://localhost:5000/jenis')
             .then(res => {
                 setJenis(res.data);
+                setToggle(true);
+                setCount(count + 1);
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [toggle]);
 
     const deleteJenis = async (id) => {
         await axios.delete(`http://localhost:5000/jenis/${id}`);
+        setToggle(false);
     }
 
     return (
@@ -37,7 +42,7 @@ function KelolaJenis() {
                             <td className="p-3 px-5">{jenis.nama}</td>
                             <td className="p-3 px-5">
                                 <a href={`/jenis/edit/${jenis.id}`} className="text-blue-500 hover:text-blue-700 hover:underline">Edit</a>
-                                <a href={`/jenis/delete/${jenis.id}`} className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteJenis(jenis.id)}>Hapus</a>
+                                <button className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deleteJenis(jenis.id)}>Hapus</button>
                             </td>
                         </tr>
                     ))}
