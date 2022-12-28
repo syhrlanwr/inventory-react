@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Layout from './layouts/Layout';
 
 function KelolaRak() {
     const [rak, setRak] = useState([]);
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:5000/rak')
             .then(res => {
                 setRak(res.data);
+                setLoading(true)
             }).catch(err => {
                 console.log(err);
             })
-    }, [rak]);
+    }, [loading]);
 
     const deleteRak = async (id) => {
-        const res = await axios.delete(`http://localhost:5000/rak/${id}`)
-        if (res.status === 200) {
-            const newRak = rak.filter((rak) => rak.id !== id)
-            setRak(newRak)
-        } else {
-            alert('Gagal menghapus data')
-        }
+        await axios.delete(`http://localhost:5000/rak/${id}`);
+        setLoading(false)
     }
 
     return (
