@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 const AddUser = () => {
     const [name, setName] = useState('');
@@ -11,7 +12,7 @@ const AddUser = () => {
 
     const saveUsers = async(e) => {
         e.preventDefault();
-            await axios.post('http://localhost:5000/users', {
+            await jwtInterceptor.post('http://localhost:5000/users', {
                 name: name,
                 username: username,
                 password: password,

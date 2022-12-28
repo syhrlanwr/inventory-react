@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditSatuan() {
     const [nama, setNama] = useState("");
@@ -9,7 +10,7 @@ function EditSatuan() {
     
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/satuan/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/satuan/${id}`).then((res) => {
             setNama(res.data.nama);
         });
     }, [id]);

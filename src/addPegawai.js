@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function AddPegawai() {
   const [nama, setNama] = useState('');
@@ -9,7 +10,7 @@ function AddPegawai() {
 
   const savePegawai = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/pegawai', {
+    await jwtInterceptor.post('http://localhost:5000/pegawai', {
       nama: nama,
       nip: nip,
     });

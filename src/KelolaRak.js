@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaRak() {
     const [rak, setRak] = useState([]);
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        axios.get('http://localhost:5000/rak')
+        jwtInterceptor.get('http://localhost:5000/rak')
             .then(res => {
                 setRak(res.data);
                 setLoading(true)
@@ -16,7 +17,7 @@ function KelolaRak() {
     }, [loading]);
 
     const deleteRak = async (id) => {
-        await axios.delete(`http://localhost:5000/rak/${id}`);
+        await jwtInterceptor.delete(`http://localhost:5000/rak/${id}`);
         setLoading(false)
     }
 

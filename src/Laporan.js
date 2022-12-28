@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import jwtInterceptor from './interceptors/axios'
 
 function Laporan() {
   const [laporan, setLaporan] = useState([])
@@ -9,7 +10,7 @@ function Laporan() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/laporan')
+    jwtInterceptor.get('http://localhost:5000/laporan')
       .then((res) => {
         setLaporan(res.data)
         setLoading(false)

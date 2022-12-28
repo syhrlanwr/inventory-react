@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaBarang (){
     const [isOpen, setIsOpen] = useState(false)
@@ -9,7 +10,7 @@ function KelolaBarang (){
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/barang').then((res) => {
+        jwtInterceptor.get('http://localhost:5000/barang').then((res) => {
             setBarang(res.data);
             console.log(res.data);
             setLoading(true);
@@ -17,7 +18,7 @@ function KelolaBarang (){
     }, [loading]);
 
     const deleteBarang = async (id) => {
-        await axios.delete('http://localhost:5000/barang/' + id)
+        await jwtInterceptor.delete('http://localhost:5000/barang/' + id)
             .then(() => {
                 setLoading(false);
             })

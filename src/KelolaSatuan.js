@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaSatuan() {
     const [satuan, setSatuan] = useState([]);
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        axios.get('http://localhost:5000/satuan')
+        jwtInterceptor.get('http://localhost:5000/satuan')
             .then(res => {
                 setSatuan(res.data);
                 setLoading(true)
@@ -16,7 +17,7 @@ function KelolaSatuan() {
     }, [loading]);
 
     const deleteSatuan = async (id) => {
-        await axios.delete(`http://localhost:5000/satuan/${id}`);
+        await jwtInterceptor.delete(`http://localhost:5000/satuan/${id}`);
         setLoading(false)
     }
 

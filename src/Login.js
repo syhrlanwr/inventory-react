@@ -8,29 +8,37 @@ function Login() {
     const userRef = useRef();
     const errorRef = useRef();
 
-    const [user, setUser] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const navigate = useNavigate();
-
+    const { login } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     useEffect(() => {
         userRef.current.focus();
+        if (user) {
+            navigate("/");
+        }
     }, []);
 
     useEffect(() => {
         setErrMsg("");
-    }, [user, password]);
+    }, [username, password]);
 
     const handleSubmit = async (e) => {
+        let payload = {
+            username: username,
+            password: password,
+        };
         e.preventDefault();
         try {
-            const { data } = await axios.post("http://localhost:5000/auth/login", {
-                username: user,
-                password: password,
-            }, {
-                withCredentials: true,
-            });
-            console.log(data);
+            // const { data } = await axios.post("http://localhost:5000/auth/login", {
+            //     username: user,
+            //     password: password,
+            // }, {
+            //     withCredentials: true,
+            // });
+            await login(payload);
             navigate("/");
         } catch (error) {
             setErrMsg(error.response.data.message);
@@ -57,7 +65,7 @@ function Login() {
                         <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
                             Username
                         </label>
-                        <input className="border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:border-gray-500" type="text" placeholder="Username" ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required/>
+                        <input className="border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:border-gray-500" type="text" placeholder="Username" ref={userRef} autoComplete="off" onChange={(e) => setUsername(e.target.value)} value={username} required/>
                     </div>
                     <div className="flex flex-col mb-6">
                         <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">

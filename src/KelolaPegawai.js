@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaPegawai() {
     const [pegawai, setPegawai] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/pegawai').then((res) => {
+        jwtInterceptor.get('http://localhost:5000/pegawai').then((res) => {
             setPegawai(res.data);
             setLoading(true);
         });
     }, [loading]);
 
     function deletePegawai(id) {
-        axios.delete(`http://localhost:5000/pegawai/${id}`).then((res) => {
+        jwtInterceptor.delete(`http://localhost:5000/pegawai/${id}`).then((res) => {
             setPegawai(pegawai.filter((pegawai) => pegawai.id !== id));
             setLoading(false);
         });

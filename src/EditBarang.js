@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditBarang() {
     const [nama, setNama] = useState('');
@@ -17,7 +18,7 @@ function EditBarang() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/barang/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/barang/${id}`).then((res) => {
             setNama(res.data.nama);
             setJumlah(res.data.jumlah);
             setSatuanId(res.data.satuan_id);
@@ -27,21 +28,21 @@ function EditBarang() {
         });
         
 
-        axios.get('http://localhost:5000/satuan')
+        jwtInterceptor.get('http://localhost:5000/satuan')
             .then((res) => {
                 setSatuan(res.data);
             });
-        axios.get('http://localhost:5000/rak')
+        jwtInterceptor.get('http://localhost:5000/rak')
             .then((res) => {
                 setRak(res.data);
             }
         );
-        axios.get('http://localhost:5000/jenis')
+        jwtInterceptor.get('http://localhost:5000/jenis')
             .then((res) => {
                 setJenis(res.data);
             }
         );
-        axios.get('http://localhost:5000/pegawai')
+        jwtInterceptor.get('http://localhost:5000/pegawai')
             .then((res) => {
                 setPegawai(res.data);
             }
@@ -50,7 +51,7 @@ function EditBarang() {
 
     const Update = async (e) => {
         e.preventDefault();
-        await axios.put('http://localhost:5000/barang/' + id, {
+        await jwtInterceptor.put('http://localhost:5000/barang/' + id, {
             nama: nama,
             jumlah: jumlah,
             satuan_id: satuanId,

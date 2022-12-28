@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditRak() {
     const [nama, setNama] = useState("");
@@ -8,7 +9,7 @@ function EditRak() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/rak/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/rak/${id}`).then((res) => {
             setNama(res.data.nama);
         });
     }, [id]);
@@ -19,7 +20,7 @@ function EditRak() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:5000/rak/${id}`, data).then(navigate("/rak"));
+        jwtInterceptor.put(`http://localhost:5000/rak/${id}`, data).then(navigate("/rak"));
     }
 
     return (

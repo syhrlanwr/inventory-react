@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditUser() {
     const [name, setName] = useState("");
@@ -10,7 +11,7 @@ function EditUser() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/users/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/users/${id}`).then((res) => {
             setName(res.data.name);
             setUsername(res.data.username);
             setPassword(res.data.password);
@@ -25,7 +26,7 @@ function EditUser() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:5000/users/${id}`, data).then(navigate("/users"));
+        jwtInterceptor.put(`http://localhost:5000/users/${id}`, data).then(navigate("/users"));
     }
 
     return (

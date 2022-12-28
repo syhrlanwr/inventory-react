@@ -29,11 +29,17 @@ import EditBarangKeluar from './EditBarangKeluar';
 import KelolaPengembalian from './KelolaPengembalian';
 import AddPengembalian from './AddPengembalian';
 import Laporan from './Laporan';
+import { AuthProvider } from './context/AuthProvider';
+import ProtectedRoutes from './ProtectedRoutes';
 
 function App() {
   return (
+    <AuthProvider>
+
     <Router>
       <Routes>
+        <Route element={<ProtectedRoutes />}>
+
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/users" element={<Layout><KelolaUser /></Layout>} />
         <Route path="/users/add" element={<Layout><AddUser /></Layout>} />
@@ -59,9 +65,11 @@ function App() {
         <Route path="/pengembalian" element={<Layout><KelolaPengembalian /></Layout>} />
         <Route path="/pengembalian/add" element={<Layout><AddPengembalian /></Layout>} />
         <Route path="/laporan" element={<Layout><Laporan /></Layout>} />
+        </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 

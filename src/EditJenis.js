@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditJenis() {
     const [nama, setNama] = useState("");
@@ -8,7 +9,7 @@ function EditJenis() {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/jenis/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/jenis/${id}`).then((res) => {
             setNama(res.data.nama);
         });
     }, [id]);
@@ -19,7 +20,7 @@ function EditJenis() {
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:5000/jenis/${id}`, data).then(navigate("/jenis"));
+        jwtInterceptor.put(`http://localhost:5000/jenis/${id}`, data).then(navigate("/jenis"));
     }
     return (
         <div className="bg-white rounded-lg shadow-lg">

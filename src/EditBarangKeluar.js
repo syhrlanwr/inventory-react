@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function EditBarangKeluar() {
     const [jumlah, setJumlah] = useState('');
@@ -15,23 +16,23 @@ function EditBarangKeluar() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/barangkeluar/' + id)
+        jwtInterceptor.get('http://localhost:5000/barangkeluar/' + id)
             .then((res) => {
                 setJumlah(res.data.jumlah);
                 setBarangId(res.data.barang_id);
                 setPegawaiId(res.data.pegawai_id);
                 setUserId(res.data.user_id);
             });
-        axios.get('http://localhost:5000/satuan')
+        jwtInterceptor.get('http://localhost:5000/satuan')
             .then((res) => {
                 setSatuan(res.data);
             });
-        axios.get('http://localhost:5000/barang')
+        jwtInterceptor.get('http://localhost:5000/barang')
             .then((res) => {
                 setBarang(res.data);
             }
         );
-        axios.get('http://localhost:5000/pegawai')
+        jwtInterceptor.get('http://localhost:5000/pegawai')
             .then((res) => {
                 setPegawai(res.data);
             }
@@ -40,7 +41,7 @@ function EditBarangKeluar() {
 
     const saveBarangkeluar = async (e) => {
         e.preventDefault();
-        await axios.put('http://localhost:5000/barangkeluar/' + id, {
+        await jwtInterceptor.put('http://localhost:5000/barangkeluar/' + id, {
             barang_id: barangId,
             jumlah: jumlah,
             pegawai_id: pegawaiId,

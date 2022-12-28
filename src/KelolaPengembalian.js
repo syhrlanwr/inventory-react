@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaPengembalian(){
     const [pengembalian, setPengembalian] = useState([]);
@@ -9,19 +10,20 @@ function KelolaPengembalian(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/pengembalian').then((res) => {
+        jwtInterceptor.get('http://localhost:5000/pengembalian').then((res) => {
             setPengembalian(res.data);
             console.log(res.data);
             setLoading(true);
         });
     }, [loading]);
 
-    // const deleteBarangkeluar = async (id) => {
-    //     await axios.delete('http://localhost:5000/barangkeluar/' + id)
-    //         .then(() => {
-    //             setLoading(false);
-    //         })
-    // }
+    const deletePengembalian = async (id) => {
+        await jwtInterceptor.delete('http://localhost:5000/pengembalian/' + id)
+            .then(() => {
+                setLoading(false);
+            })
+    }
+    
 
     return(
         <div>
@@ -36,6 +38,7 @@ function KelolaPengembalian(){
                     <th className="text-left p-3 px-5">Peminjam</th>
                     <th className="text-left p-3 px-5">Admin yang bertugas</th>
                     <th className="text-left p-3 px-5">Tanggal Pengembalian</th>
+                    <th className="text-left p-3 px-5">Aksi</th>
                 </thead>
                 <tbody>
                     {pengembalian.map((pengembalian, index) => (
@@ -46,6 +49,11 @@ function KelolaPengembalian(){
                             <td className="py-4 px-5">{pengembalian.barangkeluar.pegawai.nama}</td>
                             <td className="py-4 px-5">{pengembalian.user.name}</td>
                             <td className="py-4 px-5">{Date(pengembalian.createdAt).split(' ').slice(1, 4).join(' ')}</td>
+                            <td className="py-4 px-5">
+                                <div className="flex items-center space-x-4 text-center">
+                                    <button className="text-red-500 hover:text-red-700 hover:underline ml-5" onClick={() => deletePengembalian(pengembalian.id)}>Hapus</button>
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

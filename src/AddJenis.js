@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function AddJenis() {
     const [nama, setNama] = useState('');
@@ -9,7 +10,7 @@ function AddJenis() {
 
     const saveJenis = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/jenis', {
+        await jwtInterceptor.post('http://localhost:5000/jenis', {
             nama: nama,
         });
         navigate("/jenis");

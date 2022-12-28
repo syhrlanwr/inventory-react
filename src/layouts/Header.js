@@ -1,77 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
+import AuthContext from '../context/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 
 function Header(){
 
     const [isOpen, setIsOpen] = useState(false)
-    const [user , setUser] = useState('');
     const [token, setToken] = useState("");
     const [expired, setExpired] = useState("");
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const toggle = () => {
         setIsOpen(!isOpen)
-    }
-
-    useEffect(() => {
-        refreshToken();
-    }, []);
-
-    const refreshToken = async () => {
-        try {
-	        const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
-	        const decoded = jwt_decode(res.data.accessToken);
-            console.log(decoded);
-            setToken(res.data.accessToken);
-            setExpired(decoded.exp);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const axiosjwt = axios.create();
-    axiosjwt.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expired * 1000 < currentDate.getTime()) {
-            const res = await axios.get("http://localhost:5000/auth/token", { withCredentials: true });
-            config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-            const decoded = jwt_decode(res.data.accessToken);
-            setToken(res.data.accessToken);
-            setExpired(decoded.exp);
-        }
-        return config;
-    } , (error) => {
-        return Promise.reject(error);
-    });
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/users/me', {headers: {Authorization: `Bearer ${token}`}})
-            .then(res => {
-                setUser(res.data);
-            }).catch(err => {
-                console.log(err);
-            })
-    }, [token]);
-
-
-
-
+    }        
 
     let dropdownMenu = null;
 
     if (isOpen) {
         dropdownMenu = (
             <div className="flex flex-col absolute bg-white shadow-lg rounded-lg px-4 py-2 w-48 justify-center items-center">
-                <a href="/" className="text-gray-700 w-full flex items-center px-2 py-2 hover:bg-gray-200 rounded-lg">
-                    <span className="mdi mdi-account-outline mr-2"></span>
-                    Profile
-                </a>
-                <a href="/logout" className="text-gray-700 w-full flex items-center px-2 py-2 hover:bg-gray-200 rounded-lg">
+                <button onClick={() => {
+                    logout();
+                    navigate('/login')
+                }} className="text-gray-700 w-full flex items-center px-2 py-2 hover:bg-gray-200 rounded-lg">
                     <span className="mdi mdi-logout mr-2">
                     </span>
                     Logout
-                </a>
+                </button>
             </div>
         )
     } else {

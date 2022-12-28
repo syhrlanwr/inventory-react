@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwtInterceptor from './interceptors/axios';
 
 function KelolaJenis() {
     const [jenis, setJenis] = useState([]);
@@ -7,7 +8,7 @@ function KelolaJenis() {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/jenis')
+        jwtInterceptor.get('http://localhost:5000/jenis')
             .then(res => {
                 setJenis(res.data);
                 setToggle(true);
@@ -18,7 +19,7 @@ function KelolaJenis() {
     }, [toggle]);
 
     const deleteJenis = async (id) => {
-        await axios.delete(`http://localhost:5000/jenis/${id}`);
+        await jwtInterceptor.delete(`http://localhost:5000/jenis/${id}`);
         setToggle(false);
     }
 

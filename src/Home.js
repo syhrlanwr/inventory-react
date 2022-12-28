@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import jwtInterceptor from "./interceptors/axios";
 
 function Home (){
     const [pengembalianCount, setPengembalianCount] = useState(0);
@@ -9,22 +10,22 @@ function Home (){
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/barang/')
+        jwtInterceptor.get('http://localhost:5000/barang/')
             .then((res) => {
                 setBarangCount(res.data.length);
             }
         );
-        axios.get('http://localhost:5000/barangkeluar')
+        jwtInterceptor.get('http://localhost:5000/barangkeluar')
             .then((res) => {
                 setBarangKeluarCount(res.data.length);
             }
         );
-        axios.get('http://localhost:5000/pengembalian')
+        jwtInterceptor.get('http://localhost:5000/pengembalian')
             .then((res) => {
                 setPengembalianCount(res.data.length);
             }
         );
-        axios.get('http://localhost:5000/laporan')
+        jwtInterceptor.get('http://localhost:5000/laporan')
             .then((res) => {
                 setLaporan(res.data);
             }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function AddRak() {
     const [nama, setNama] = useState('');
@@ -9,7 +10,7 @@ function AddRak() {
 
     const saveRak = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/rak', {
+        await jwtInterceptor.post('http://localhost:5000/rak', {
             nama: nama,
         });
         navigate("/rak");

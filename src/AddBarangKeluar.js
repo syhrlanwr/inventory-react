@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jwtInterceptor from './interceptors/axios';
 
 function AddBarangKeluar() {
     const [jumlah, setJumlah] = useState('');
@@ -15,17 +15,17 @@ function AddBarangKeluar() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/satuan')
+        jwtInterceptor.get('http://localhost:5000/satuan')
             .then((res) => {
                 setSatuan(res.data);
                 console.log(satuan);
             });
-        axios.get('http://localhost:5000/barang')
+        jwtInterceptor.get('http://localhost:5000/barang')
             .then((res) => {
                 setBarang(res.data);
             }
         );
-        axios.get('http://localhost:5000/pegawai')
+        jwtInterceptor.get('http://localhost:5000/pegawai')
             .then((res) => {
                 setPegawai(res.data);
             }
@@ -35,7 +35,7 @@ function AddBarangKeluar() {
 
     const saveBarangkeluar = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/barangkeluar', {
+        await jwtInterceptor.post('http://localhost:5000/barangkeluar', {
             barang_id: barangId,
             jumlah: jumlah,
             pegawai_id: pegawaiId,

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import jwtInterceptor from "./interceptors/axios";
 
 function EditPegawai (){
     const { id} = useParams();
@@ -10,7 +11,7 @@ function EditPegawai (){
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/pegawai/${id}`).then((res) => {
+        jwtInterceptor.get(`http://localhost:5000/pegawai/${id}`).then((res) => {
             setNip(res.data.nip);
             setNama(res.data.nama);
         });
@@ -23,7 +24,7 @@ function EditPegawai (){
 
     function Update(e) {
         e.preventDefault();
-        axios.put(`http://localhost:5000/pegawai/${id}`, data).then(navigate("/pegawai"));
+        jwtInterceptor.put(`http://localhost:5000/pegawai/${id}`, data).then(navigate("/pegawai"));
     }
 
 
